@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input type="text" placeholder="Add Band..">
-    <button> Add </button>
+    <input type="text" placeholder="Add Band.." v-model="bandName" @keypress.enter = "addBand">
+    <button @click  = "addBand"> Add </button>
 
     <ul>
       <BandItem v-for="band in bands" :key="band.id" :band="band">
@@ -22,6 +22,8 @@ export default {
   },
   data () {
     return {
+      id: 3,
+      bandName:'',
       bands: [{
         id: 1,
         name: 'Black Sabbath',
@@ -32,6 +34,12 @@ export default {
         songs: ['Yellow', 'Fix you', 'Mylo xyloto']
       }]
     }
+  },
+    methods: {
+    addBand () {
+      this.bands.push({id: this.id++, name: this.bandName, songs: []})
+      this.bandName = ''
   }
+    }
 }
 </script>
